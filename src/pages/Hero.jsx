@@ -240,7 +240,7 @@ const Hero = ({ onLoad }) => {
         transition={{ duration: 1, ease: [0.6, -0.05, 0.01, 0.99] }}
       >
         <motion.video
-          src='/bgv.mp4' 
+          src='/bgv2.mp4' 
           alt='Hero Background' 
           className='h-full w-full object-cover'
           autoPlay
