@@ -1,6 +1,5 @@
 import ContactForm from "../components/ContactForm";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+import ContactInfo from "../components/ContactInfo";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -79,7 +78,7 @@ export default function ContactUs() {
               onLoad={() => setIsMapLoading(false)}
             ></iframe>
           </div>
-          <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-white p-6 rounded-lg shadow-lg w-[90%] max-w-3xl z-20">
+          <div className="absolute top-[192px] left-1/2 transform -translate-x-1/2 bg-white p-6 rounded-lg shadow-lg w-[90%] max-w-3xl z-20">
           <h2 className="text-2xl font-semibold mb-4 text-center">Head Office</h2>
           <ContactInfo />
         </div>

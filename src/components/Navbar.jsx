@@ -236,7 +236,7 @@ const Navbar = () => {
 
               <div className="p-6 border-t border-gray-800">
                 <Link
-                  to="/contact"
+                  to="/contact-us"
                   className="block w-full bg-gradient-to-r from-[#2A72F8] to-[#8F44EC] text-white py-3 px-6 rounded-lg font-medium hover:from-[#1E5FD8] hover:to-[#7D3AD8] transition-all duration-300 text-center transform hover:scale-[1.02] active:scale-[0.98]"
                   onClick={() => setIsOpen(false)}
                 >
