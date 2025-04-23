@@ -131,7 +131,7 @@ export default function IPDValueCreation({ onLoad }) {
           </div>
 
           <div className="absolute bottom-0 left-0 right-0 flex justify-center gap-2 pb-2">
-            {cards.map((_, index) => (
+            {cards.map((card, index) => (
               <button
                 key={card.id}
                 className={`w-2 h-2 rounded-full ${

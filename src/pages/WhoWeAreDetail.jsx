@@ -25,7 +25,16 @@ export default function WhoWeAreDetail() {
 
     // Ensure page shows even if components take too long
     useEffect(() => {
-        const timeout = setTimeout(() => setIsLoading(false), 5000);
+        const timeout = setTimeout(() => {
+            setIsLoading(false);
+            // Force all components to be marked as loaded
+            setComponentsLoaded({
+                hero: true,
+                modal: true,
+                valueCreation: true,
+                whyChooseUs: true
+            });
+        }, 3000); // Reduced timeout to 3 seconds
         return () => clearTimeout(timeout);
     }, []);
 
