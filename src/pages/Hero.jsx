@@ -3,11 +3,16 @@ import { motion, useAnimation, useScroll } from 'framer-motion';
 import { FaCheckCircle } from 'react-icons/fa';
 import { ChevronDown } from "lucide-react";
 
-const Hero = () => {
+const Hero = ({ onLoad }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
+  const [resourcesLoaded, setResourcesLoaded] = useState({
+    video: false,
+    images: new Set()
+  });
   const controls = useAnimation();
   const { scrollY } = useScroll();
   const containerRef = useRef(null);
@@ -26,6 +31,43 @@ const Hero = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollY, controls]);
+
+  // Effect to track resource loading
+  useEffect(() => {
+    const allImagesLoaded = sectors.every(sector => resourcesLoaded.images.has(sector.img));
+    const allResourcesLoaded = allImagesLoaded && resourcesLoaded.video;
+    
+    if (allResourcesLoaded) {
+      setIsLoading(false);
+      onLoad?.();
+    }
+  }, [resourcesLoaded, onLoad]);
+
+  // Handle video load
+  const handleVideoLoad = () => {
+    setResourcesLoaded(prev => ({
+      ...prev,
+      video: true
+    }));
+  };
+
+  // Handle image preloading
+  const handleImageLoad = (imagePath) => {
+    setResourcesLoaded(prev => ({
+      ...prev,
+      images: new Set([...prev.images, imagePath])
+    }));
+  };
+
+  // Preload all sector images
+  useEffect(() => {
+    sectors.forEach(sector => {
+      const img = new Image();
+      img.src = sector.img;
+      img.onload = () => handleImageLoad(sector.img);
+      img.onerror = () => handleImageLoad(sector.img); // Count errors as loaded to prevent hanging
+    });
+  }, []);
 
   // Memoize sectors data to prevent unnecessary re-renders
   const sectors = useMemo(() => [
@@ -171,7 +213,24 @@ const Hero = () => {
   };
 
   return (
-    <div className='w-full' role="main" aria-label="Hero section" ref={containerRef}>
+    <div className='w-full relative' role="main" aria-label="Hero section" ref={containerRef}>
+      <AnimatePresence>
+        {isLoading && (
+          <motion.div
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 bg-black flex items-center justify-center"
+          >
+            <div className="flex flex-col items-center">
+              <div 
+                className="w-12 h-12 rounded-full border-4 border-t-transparent animate-spin"
+                style={{ borderImage: 'linear-gradient(to right, #2A72F8, #8F44EC) 1' }}
+              />
+              <p className="mt-4 text-white/80 text-sm">Loading resources...</p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
       {/* Hero Section */}
       <motion.div
         className='relative w-full h-[100vh]'
@@ -190,6 +249,7 @@ const Hero = () => {
           playsInline
           preload="auto"
           loading="eager"
+          onLoadedData={handleVideoLoad}
           initial={{ scale: 1.1 }}
           animate={{ scale: 1 }}
           transition={{ 
