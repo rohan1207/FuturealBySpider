@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback, useMemo, useRef } from 'react';
-import { motion, useAnimation, useScroll } from 'framer-motion';
+import { motion, AnimatePresence, useAnimation, useScroll } from 'framer-motion';
 import { FaCheckCircle } from 'react-icons/fa';
 import { ChevronDown } from "lucide-react";
 
