@@ -23,6 +23,12 @@ export default defineConfig({
     cssMinify: true,
     cssCodeSplit: true,
     outDir: 'dist',
-    assetsDir: 'assets', // Optional: default is 'assets'
+    assetsDir: 'assets',
+    rollupOptions: {
+      output: {
+        manualChunks: undefined
+      }
+    },
+    copyPublicDir: true
   },
 })
