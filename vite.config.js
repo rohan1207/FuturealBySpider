@@ -19,6 +19,8 @@ export default defineConfig({
   },
 
   build: {
+    cssMinify: true,
+    cssCodeSplit: true,
     outDir: 'dist',
     assetsDir: 'assets', // Optional: default is 'assets'
   },
