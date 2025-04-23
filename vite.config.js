@@ -29,6 +29,8 @@ export default defineConfig({
         manualChunks: undefined
       }
     },
-    copyPublicDir: true
+    copyPublicDir: true,
+    // Ensure index.html and 404.html are handled properly
+    emptyOutDir: true
   },
 })
