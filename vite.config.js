@@ -16,6 +16,7 @@ export default defineConfig({
 
   server: {
     port: 5174, // Only used for local dev
+    historyApiFallback: true,
   },
 
   build: {
