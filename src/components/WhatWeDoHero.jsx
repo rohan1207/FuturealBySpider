@@ -22,7 +22,7 @@ const images = [
   { src: "./realestate.jpg", title: "Civil & Interior Works", category: "residential" }
 ];
 
-const Hero = ({ onLoad }) => {
+const WhatWeDoHero = ({ onLoad }) => {
   const [currentImage, setCurrentImage] = useState(0);
   const [direction, setDirection] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
@@ -177,7 +177,7 @@ const Hero = ({ onLoad }) => {
             className="text-4xl md:text-6xl font-bold leading-tight mb-6"
           >
             <motion.span variants={itemVariants}>
-              Designing Spaces,<br />
+            Design & Build,<br />
               <span className="bg-gradient-to-r from-sky-400 to-purple-500 bg-clip-text text-transparent">Defining Experiences</span>
             </motion.span>
           </motion.h1>
@@ -186,8 +186,7 @@ const Hero = ({ onLoad }) => {
             variants={itemVariants}
             className="text-lg md:text-xl text-white/90 max-w-3xl mb-8"
           >
-            At Futureal, we reimagine commercial spaces with creativity, precision, and purpose.
-            Specializing in Design & Build and General Contracting, we bring your vision to life.
+          Whether it's a high-tech office, healthcare facility, or an industrial space our team collaborates closely with clients to understand their vision, then brings it to life with precision and creativity. With a strong focus on innovation, compliance, and functionality, we deliver spaces that are both aesthetically striking and purpose-built for performance.
           </motion.p>
 
           <motion.div 
@@ -236,4 +235,4 @@ const Hero = ({ onLoad }) => {
   );
 };
 
-export default Hero;
+export default WhatWeDoHero;

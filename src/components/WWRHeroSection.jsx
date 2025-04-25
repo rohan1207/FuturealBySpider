@@ -1,18 +1,55 @@
-import React, { useEffect, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { ChevronDown } from "lucide-react";
-import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { motion, AnimatePresence, useInView } from 'framer-motion';
 
 export default function WWRHeroSection({ onLoad }) {
+  const contentRef = useRef(null);
+  const dropdownRef = useRef(null);
+  const isInView = useInView(contentRef, { once: true });
+
+  const [open, setOpen] = useState(false);
+
+  // Dropdown handlers
+  const handleMouseEnter = () => {
+    if (window.innerWidth > 768) setOpen(true); // only on desktop
+  };
+
+  const handleMouseLeave = () => {
+    if (window.innerWidth > 768) setOpen(false);
+  };
+
+  const handleButtonClick = () => {
+    if (window.innerWidth <= 768) setOpen(prev => !prev); // toggle on mobile
+  };
+
+  // Animation Variants
+  const containerVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        staggerChildren: 0.2,
+        duration: 0.8,
+        ease: 'easeOut',
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 },
+  };
+
   return (
     <div className="relative h-screen w-full overflow-hidden">
       {/* Background Video */}
-      <video 
-        autoPlay 
-        loop 
-        muted 
-        playsInline 
-        preload="auto" 
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="auto"
         className="absolute inset-0 w-full h-full object-cover"
         style={{ animation: 'fadeIn 1s ease-in-out' }}
         onLoadedData={() => onLoad?.()}
@@ -21,46 +58,81 @@ export default function WWRHeroSection({ onLoad }) {
         Your browser does not support the video tag.
       </video>
 
-      {/* Lightened Overlay */}
-      <div className="absolute inset-0 bg-black bg-opacity-40" />
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/90"></div>
 
-      {/* Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center h-full text-white max-w-4xl mx-auto text-center px-4">
-        <motion.h1
-          className="text-4xl md:text-6xl font-bold mb-6 drop-shadow-md"
-          initial={{ opacity: 0, y: -40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-        >
-          Who We Are
-        </motion.h1>
-
-        <motion.p
-          className="text-xl md:text-2xl mb-[192px] drop-shadow-sm"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, delay: 0.3 }}
-        >
-          We revolutionize turnkey project delivery through innovation, precision, and empathy — creating exceptional experiences and lasting value.
-        </motion.p>
-
-        <motion.button
-          className="bg-gradient-to-r from-[#2A72F8] to-[#8F44EC] text-white px-5 py-2 rounded-full text-sm font-medium hover:from-[#1E5FD8] hover:to-[#7D3AD8] transition-all transform hover:scale-[1.02] active:scale-[0.98]"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          <Link to="/contact-us">Contact Us</Link>
-        </motion.button>
-      </div>
-
-      {/* Bouncing Arrow - Fixed positioning for perfect centering */}
-      <div className="absolute bottom-0 left-0 right-0 flex justify-center z-10 mb-6">
+      {/* Hero Content */}
+      <div className="relative z-10 px-4 md:px-10 text-white max-w-5xl w-full mx-auto">
         <motion.div
-          animate={{ y: [0, -10, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity }}
-          className="text-white"
+          ref={contentRef}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          variants={containerVariants}
+          className="mt-24"
         >
-          <ChevronDown size={36} strokeWidth={2.5} />
+          <motion.h1
+            variants={itemVariants}
+            className="text-4xl md:text-6xl font-bold leading-tight mb-6"
+          >
+            <motion.span variants={itemVariants}>
+            Who We Are<br />
+              <span className="bg-gradient-to-r from-sky-400 to-purple-500 bg-clip-text text-transparent">
+               
+Shaping the future of spaces, one project at a time
+
+              </span>
+            </motion.span>
+          </motion.h1>
+
+          <motion.p
+            variants={itemVariants}
+            className="text-lg md:text-xl text-white/90 max-w-3xl mb-8"
+          >
+          We are a multidisciplinary team of designers, engineers, and project managers dedicated to creating exceptional commercial environments. From high-impact industrial facilities to human-centric healthcare and education spaces, our projects span across sectors and are unified by our commitment to design excellence and flawless execution.
+
+          </motion.p>
+
+          {/* Dropdown */}
+          <motion.div
+            variants={itemVariants}
+            className="relative inline-block"
+            ref={dropdownRef}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          >
+            <button
+              onClick={handleButtonClick}
+              className="px-6 py-2 bg-white/10 border border-white rounded-full hover:bg-gradient-to-r from-sky-500 to-purple-500 transition-all flex items-center gap-2"
+            >
+              I'm interested in
+              <ChevronDown size={18} />
+            </button>
+
+            <AnimatePresence>
+              {open && (
+                <motion.ul
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 10 }}
+                  transition={{ duration: 0.3 }}
+                  className="absolute mt-2 w-56 bg-white text-black rounded-lg shadow-lg z-50"
+                >
+                  {['Design & Build', 'General Contracting'].map((item, idx) => (
+                    <li
+                      key={idx}
+                      className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                      onClick={() => {
+                        console.log(`Selected: ${item}`);
+                        setOpen(false);
+                      }}
+                    >
+                      {item}
+                    </li>
+                  ))}
+                </motion.ul>
+              )}
+            </AnimatePresence>
+          </motion.div>
         </motion.div>
       </div>
     </div>

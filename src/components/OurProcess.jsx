@@ -5,6 +5,7 @@ import {
   HiOutlineCube,
   HiOutlineClipboardCheck,
 } from "react-icons/hi";
+import { motion } from "framer-motion";
 
 const steps = [
   {
@@ -39,8 +40,92 @@ const steps = [
   },
 ];
 
+const QuoteCard = ({ isInView }) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+      transition={{ 
+        duration: 0.8, 
+        delay: 0.5,
+        type: "spring",
+        stiffness: 100
+      }}
+      className="relative max-w-3xl mx-auto mt-16 mb-8 px-6 py-8 md:py-10 rounded-2xl overflow-hidden"
+    >
+      {/* Background with gradient */}
+      <motion.div 
+        className="absolute inset-0 bg-gradient-to-r from-blue-600/90 to-purple-600/90 rounded-2xl z-0"
+        initial={{ opacity: 0.7 }}
+        animate={isInView ? { opacity: 0.9 } : { opacity: 0.7 }}
+        transition={{ duration: 1.2 }}
+      />
+      
+      {/* Decorative elements */}
+      <motion.div 
+        className="absolute top-0 left-0 w-24 h-24 rounded-br-full bg-white/10"
+        initial={{ scale: 0 }}
+        animate={isInView ? { scale: 1 } : { scale: 0 }}
+        transition={{ duration: 0.6, delay: 0.3 }}
+      />
+      
+      <motion.div 
+        className="absolute bottom-0 right-0 w-32 h-32 rounded-tl-full bg-white/10"
+        initial={{ scale: 0 }}
+        animate={isInView ? { scale: 1 } : { scale: 0 }}
+        transition={{ duration: 0.6, delay: 0.4 }}
+      />
+      
+      {/* Quote content */}
+      <div className="relative z-10">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+          transition={{ duration: 0.5, delay: 0.7 }}
+          className="text-5xl text-white opacity-70 font-serif leading-none mb-3"
+        >
+          "
+        </motion.div>
+        
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          className="text-white text-lg md:text-xl font-medium leading-relaxed mb-4"
+        >
+          We take a comprehensive approach to project delivery. Whether it's through our 
+          <span className="font-bold"> Design & Build model </span> 
+          or 
+          <span className="font-bold"> General Contracting services</span>, 
+          we integrate design vision with precise planning and execution.
+        </motion.p>
+        
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+          transition={{ duration: 0.5, delay: 1.1 }}
+          className="text-white/90 text-base md:text-lg leading-relaxed"
+        >
+          Our collaborative process ensures efficiency, cost control, and superior craftsmanship, all under one roof.
+        </motion.p>
+        
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+          transition={{ duration: 0.5, delay: 1.3 }}
+          className="text-5xl text-white opacity-70 font-serif leading-none text-right mt-3"
+        >
+          "
+        </motion.div>
+      </div>
+    </motion.div>
+  );
+};
+
 const OurProcess = ({ onLoad }) => {
   const [bgLoaded, setBgLoaded] = useState(false);
+  const [quoteInView, setQuoteInView] = useState(false);
+  const quoteRef = useRef(null);
 
   // Preload background image
   useEffect(() => {
@@ -57,6 +142,7 @@ const OurProcess = ({ onLoad }) => {
       onLoad?.();
     };
   }, [onLoad]);
+  
   const [activeStep, setActiveStep] = useState(0);
   const [isInView, setIsInView] = useState(false);
   const sectionRef = useRef(null);
@@ -87,6 +173,22 @@ const OurProcess = ({ onLoad }) => {
 
     if (sectionRef.current) {
       observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+  
+  // Intersection observer for quote card
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setQuoteInView(entry.isIntersecting);
+      },
+      { threshold: 0.3 }
+    );
+
+    if (quoteRef.current) {
+      observer.observe(quoteRef.current);
     }
 
     return () => observer.disconnect();
@@ -138,8 +240,7 @@ const OurProcess = ({ onLoad }) => {
             Our Process
           </h2>
           <p className="text-lg text-slate-800">
-            Our proven methodology ensures successful project delivery from
-            concept to completion
+            From concept to completion, Step by Step
           </p>
         </div>
 
@@ -274,7 +375,7 @@ const OurProcess = ({ onLoad }) => {
           {/* Mobile layout */}
           <div className="md:hidden">
             {/* Progress Line - FIXED: Set to lowest z-index */}
-            <div className="absolute left-8 top-[220px] bottom-[100px] w-0.5 bg-slate-200/60 z-0">
+            <div className="absolute left-8 top-[190px] bottom-[572px] w-0.5 bg-slate-200/60 z-0">
               <div
                 className="w-full transition-all duration-700 ease-out rounded-full"
                 style={{
@@ -403,6 +504,11 @@ const OurProcess = ({ onLoad }) => {
                 aria-label={`Go to step ${index + 1}`}
               />
             ))}
+          </div>
+
+          {/* Quote Card Section */}
+          <div ref={quoteRef}>
+            <QuoteCard isInView={quoteInView} />
           </div>
         </div>
       </div>

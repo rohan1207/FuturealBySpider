@@ -2,8 +2,9 @@ import React, { useEffect, useState, useCallback, useMemo, useRef } from 'react'
 import { motion, AnimatePresence, useAnimation, useScroll } from 'framer-motion';
 import { FaCheckCircle } from 'react-icons/fa';
 import { ChevronDown } from "lucide-react";
+import WhatWeDoHero from '../components/WhatWeDoHero';
 
-const Hero = ({ onLoad }) => {
+const WhatWeDo = ({ onLoad }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
@@ -213,89 +214,9 @@ const Hero = ({ onLoad }) => {
   };
 
   return (
-    <div className='w-full relative' role="main" aria-label="Hero section" ref={containerRef}>
-      <AnimatePresence>
-        {isLoading && (
-          <motion.div
-            initial={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-black flex items-center justify-center"
-          >
-            <div className="flex flex-col items-center">
-              <div 
-                className="w-12 h-12 rounded-full border-4 border-t-transparent animate-spin"
-                style={{ borderImage: 'linear-gradient(to right, #2A72F8, #8F44EC) 1' }}
-              />
-              <p className="mt-4 text-white/80 text-sm">Loading resources...</p>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-      {/* Hero Section */}
-      <motion.div
-        className='relative w-full h-[100vh]'
-        initial="hidden"
-        animate="visible"
-        variants={fadeInUp}
-        transition={{ duration: 1, ease: [0.6, -0.05, 0.01, 0.99] }}
-      >
-        <motion.video
-          src='/bgv2.mp4' 
-          alt='Hero Background' 
-          className='h-full w-full object-cover'
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="auto"
-          loading="eager"
-          onLoadedData={handleVideoLoad}
-          initial={{ scale: 1.1 }}
-          animate={{ scale: 1 }}
-          transition={{ 
-            duration: 1.5,
-            ease: [0.6, -0.05, 0.01, 0.99]
-          }}
-        />
-        <div className='absolute inset-0 bg-black/50' aria-hidden="true"></div>
-
-        {/* Content */}
-        <motion.div 
-          className='absolute inset-0 flex flex-col items-center justify-center text-center px-4 sm:px-6 pb-[200px] sm:pb-[370px] z-10'
-          initial="hidden"
-          animate="visible"
-          variants={staggerContainer}
-          transition={{ duration: 0.8 }}
-        >
-          <motion.h1 
-            className='mt-[160px] text-white text-4xl sm:text-3xl md:text-7xl font-extrabold leading-tight mb-4 sm:mb-6 drop-shadow-xl relative z-20'
-            variants={fadeInUp}
-          >
-            What We Do
-          </motion.h1>
-          <motion.p 
-            className='text-white text-base sm:text-lg md:text-xl max-w-3xl leading-relaxed px-4 sm:px-0 relative z-20 text-justify'
-            variants={fadeInUp}
-          >
-            At Futureal, our Design & Build approach offers a seamless solution for clients seeking an end-to-end construction experience. We integrate design, planning, and execution into a single streamlined process.
-          </motion.p>
-        </motion.div>
-
-        {/* Scroll Icon */}
-        <motion.div
-          className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-30 text-white"
-          animate={{ y: [0, -10, 0] }}
-          transition={{ 
-            duration: 1.5, 
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-          role="button"
-          aria-label="Scroll down"
-        >
-          <ChevronDown size={36} strokeWidth={2.5} />
-        </motion.div>
-      </motion.div>
+    <>
+    <WhatWeDoHero />
+   
 
       {/* DESIGN AND BUILD + OUR APPROACH */}
       <motion.div
@@ -336,52 +257,8 @@ const Hero = ({ onLoad }) => {
               Our Design & Build approach offers a seamless solution for clients seeking an end-to-end construction experience. We integrate design, planning, and execution into a single streamlined process.
             </motion.p>
 
-            <motion.h2
-              className='text-4xl text-white font-bold text-center mb-10'
-              variants={slideInLeft}
-            >
-              OUR APPROACH
-            </motion.h2>
-            <motion.div 
-              className='max-w-5xl mx-auto px-4 sm:px-6 space-y-4 sm:space-y-6'
-              variants={approachContainer}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
-            >
-              {[
-                "We closely collaborate to understand each client's vision.",
-                "We build with precision, creativity, and innovation.",
-                "We follow all standards to ensure safety and quality.",
-                "We create functional and visually striking spaces."
-              ].map((text, index) => (
-                <motion.div
-                  key={index}
-                  className='bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white rounded-xl p-3 sm:p-4 flex items-start gap-3 sm:gap-4 shadow-md hover:shadow-lg transition'
-                  variants={approachVariants}
-                  whileHover={{ 
-                    scale: 1.02,
-                    transition: { duration: 0.3 }
-                  }}
-                >
-                  <motion.div
-                    variants={iconVariants}
-                    className="flex-shrink-0"
-                  >
-                    <FaCheckCircle className="text-white text-xl sm:text-2xl mt-1" aria-hidden="true" />
-                  </motion.div>
-                  <motion.p 
-                    className='text-white text-sm sm:text-lg'
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true, amount: 0.2 }}
-                    transition={{ duration: 0.8 }}
-                  >
-                    {text}
-                  </motion.p>
-                </motion.div>
-              ))}
-            </motion.div>
+          
+       
           </div>
         </motion.div>
       </motion.div>
@@ -551,9 +428,9 @@ const Hero = ({ onLoad }) => {
           </motion.button>
         </div>
       </motion.div>
-    </div>
-  );
+    
+    </> );
 };
 
-export default React.memo(Hero);
+export default React.memo(WhatWeDo);
 

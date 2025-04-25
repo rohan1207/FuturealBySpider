@@ -63,8 +63,9 @@ export default function HomePage() {
       </AnimatePresence>
       
       <Hero onLoad={() => handleComponentLoad('hero')} />
-      <WhoAreWe onLoad={() => handleComponentLoad('whoAreWe')} />
       <OurValues onLoad={() => handleComponentLoad('ourValues')} />
+      <WhoAreWe onLoad={() => handleComponentLoad('whoAreWe')} />
+      
       <OurProcess onLoad={() => handleComponentLoad('ourProcess')} />
     </>
   )

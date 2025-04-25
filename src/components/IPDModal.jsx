@@ -189,8 +189,8 @@ export default function ProjectBenefits({ onLoad }) {
                   ease: "easeOut" 
                 }}
               />
-              <motion.h2
-                className="text-gray-700 font-semibold mt-2"
+              <motion.h1
+                className="text-gray-700 font-semibold"
                 initial={{ y: 10, opacity: 0 }}
                 animate={inView ? { y: 0, opacity: 1 } : {}}
                 transition={{ 
@@ -199,8 +199,8 @@ export default function ProjectBenefits({ onLoad }) {
                   ease: "easeOut" 
                 }}
               >
-                Futureal IPD Benefits
-              </motion.h2>
+                 IPD Benefits
+              </motion.h1>
             </motion.div>
 
             {/* Benefit icons with staggered pop-in effect */}

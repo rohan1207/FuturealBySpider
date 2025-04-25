@@ -6,9 +6,9 @@ import LandingPage from "./pages/LandingPage";
 import WhoWeAreDetail from "./pages/WhoWeAreDetail";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import Hero from "./pages/Hero";
+import WhatWeDo from "./pages/WhatWeDo";  
 import GeneralContracting from "./components/GeneralContracting";
-import AboutUs from "./components/AboutUs";
+import AboutUs from "./pages/AboutUs";
 
 
 // Layout component that includes Navbar and Footer
@@ -34,7 +34,7 @@ function App() {
         <Route path="/home" element={<Layout><HomePage /></Layout>} />
         <Route path="/contact-us" element={<Layout><ContactUs /></Layout>} />
         <Route path="/whoweare" element={<Layout><WhoWeAreDetail /></Layout>} />
-        <Route path="/design-build" element={<Layout><Hero /></Layout >} />
+        <Route path="/design-build" element={<Layout><WhatWeDo /></Layout >} />
         <Route path="/general-contracting" element={<Layout><GeneralContracting /></Layout>} />
         <Route path="/about" element={<Layout><AboutUs /></Layout>} />
 
