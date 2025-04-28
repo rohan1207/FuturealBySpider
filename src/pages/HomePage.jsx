@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import Navbar from '../components/Navbar'
-import Hero from '../components/Hero'
-import WhoAreWe from '../components/WhoAreWe'
-import OurValues from '../components/OurValues'
-import OurProcess from '../components/OurProcess'
-import Footer from '../components/Footer'
-
-
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import Navbar from "../components/Navbar";
+import Hero from "../components/Hero";
+import WhoAreWe from "../components/WhoAreWe";
+import OurValues from "../components/OurValues";
+import OurProcess from "../components/OurProcess";
+import Footer from "../components/Footer";
+import DesignExcellence from "../components/DesignExcellence";
 
 export default function HomePage() {
   const [isLoading, setIsLoading] = useState(true);
@@ -16,15 +15,16 @@ export default function HomePage() {
     hero: false,
     whoAreWe: false,
     ourValues: false,
-    ourProcess: false
+    ourProcess: false,
+    designExcellence: false,
   });
 
   // Effect for checking loaded components
   useEffect(() => {
-    const allLoaded = Object.values(componentLoaded).every(loaded => loaded);
-    console.log('Component load status:', componentLoaded);
+    const allLoaded = Object.values(componentLoaded).every((loaded) => loaded);
+    console.log("Component load status:", componentLoaded);
     if (allLoaded || timeoutOccurred) {
-      console.log('All components loaded or timeout occurred');
+      console.log("All components loaded or timeout occurred");
       setIsLoading(false);
     }
   }, [componentLoaded, timeoutOccurred]);
@@ -32,7 +32,7 @@ export default function HomePage() {
   // Effect for timeout
   useEffect(() => {
     const timer = setTimeout(() => {
-      console.log('Loading timeout occurred');
+      console.log("Loading timeout occurred");
       setTimeoutOccurred(true);
     }, 5000); // 5 second timeout
 
@@ -41,9 +41,9 @@ export default function HomePage() {
 
   const handleComponentLoad = (component) => {
     console.log(`Component loaded: ${component}`);
-    setComponentLoaded(prev => ({
+    setComponentLoaded((prev) => ({
       ...prev,
-      [component]: true
+      [component]: true,
     }));
   };
 
@@ -56,17 +56,23 @@ export default function HomePage() {
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-50 bg-black flex items-center justify-center"
           >
-            <div className="w-12 h-12 rounded-full border-4 border-t-transparent animate-spin"
-                 style={{ borderImage: 'linear-gradient(to right, #2A72F8, #8F44EC) 1' }} />
+            <div
+              className="w-12 h-12 rounded-full border-4 border-t-transparent animate-spin"
+              style={{
+                borderImage: "linear-gradient(to right, #2A72F8, #8F44EC) 1",
+              }}
+            />
           </motion.div>
         )}
       </AnimatePresence>
-      
-      <Hero onLoad={() => handleComponentLoad('hero')} />
-      <OurValues onLoad={() => handleComponentLoad('ourValues')} />
-      <WhoAreWe onLoad={() => handleComponentLoad('whoAreWe')} />
-      
-      <OurProcess onLoad={() => handleComponentLoad('ourProcess')} />
+
+      <Hero onLoad={() => handleComponentLoad("hero")} />
+      <OurValues onLoad={() => handleComponentLoad("ourValues")} />
+      <DesignExcellence
+        onLoad={() => handleComponentLoad("designExcellence")}
+      />
+      <WhoAreWe onLoad={() => handleComponentLoad("whoAreWe")} />
+      <OurProcess onLoad={() => handleComponentLoad("ourProcess")} />
     </>
-  )
+  );
 }

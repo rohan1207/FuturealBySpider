@@ -6,7 +6,7 @@ import { MenuIcon, XIcon } from "@heroicons/react/outline";
 const menuItems = [
   { name: "Who We Are", path: "/whoweare" },
   { name: "What We Do", path: "/design-build" },
-  { name: "Meet Our Team", path: "/about" },
+  { name: "About US", path: "/about" },
 ];
 
 const rightLinks = [
@@ -18,7 +18,7 @@ const Navbar = () => {
 
   return (
     <header className="bg-black z-20 sticky top-0 w-full shadow-md">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-0 lg:px-8">
         <div className="flex items-center justify-between h-20 md:h-24">
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center">
@@ -31,7 +31,7 @@ const Navbar = () => {
             >
               <Link to="/home">
                 <img
-                  src="/newlogo.png"
+                  src="/FLogo.png"
                   alt="Logo"
                   className="h-10 md:h-11 w-auto object-contain transition-all duration-300"
                 />

@@ -1,8 +1,22 @@
-import React, { useEffect, useState, useCallback, useMemo, useRef } from 'react';
-import { motion, AnimatePresence, useAnimation, useScroll } from 'framer-motion';
-import { FaCheckCircle } from 'react-icons/fa';
+import React, {
+  useEffect,
+  useState,
+  useCallback,
+  useMemo,
+  useRef,
+} from "react";
+import {
+  motion,
+  AnimatePresence,
+  useAnimation,
+  useScroll,
+} from "framer-motion";
+import { FaCheckCircle } from "react-icons/fa";
 import { ChevronDown } from "lucide-react";
-import WhatWeDoHero from '../components/WhatWeDoHero';
+import WhatWeDoHero from "../components/WhatWeDoHero";
+import WhyChooseUs from "../components/WhyChooseUs";
+import { DesignandBuild } from "../components/DesignandBuild";
+import { GeneralContracting } from "../components/GeneralContracting";
 
 const WhatWeDo = ({ onLoad }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -12,7 +26,7 @@ const WhatWeDo = ({ onLoad }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [resourcesLoaded, setResourcesLoaded] = useState({
     video: false,
-    images: new Set()
+    images: new Set(),
   });
   const controls = useAnimation();
   const { scrollY } = useScroll();
@@ -29,15 +43,17 @@ const WhatWeDo = ({ onLoad }) => {
       setLastScrollY(currentScrollY);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY, controls]);
 
   // Effect to track resource loading
   useEffect(() => {
-    const allImagesLoaded = sectors.every(sector => resourcesLoaded.images.has(sector.img));
+    const allImagesLoaded = sectors.every((sector) =>
+      resourcesLoaded.images.has(sector.img)
+    );
     const allResourcesLoaded = allImagesLoaded && resourcesLoaded.video;
-    
+
     if (allResourcesLoaded) {
       setIsLoading(false);
       onLoad?.();
@@ -46,23 +62,23 @@ const WhatWeDo = ({ onLoad }) => {
 
   // Handle video load
   const handleVideoLoad = () => {
-    setResourcesLoaded(prev => ({
+    setResourcesLoaded((prev) => ({
       ...prev,
-      video: true
+      video: true,
     }));
   };
 
   // Handle image preloading
   const handleImageLoad = (imagePath) => {
-    setResourcesLoaded(prev => ({
+    setResourcesLoaded((prev) => ({
       ...prev,
-      images: new Set([...prev.images, imagePath])
+      images: new Set([...prev.images, imagePath]),
     }));
   };
 
   // Preload all sector images
   useEffect(() => {
-    sectors.forEach(sector => {
+    sectors.forEach((sector) => {
       const img = new Image();
       img.src = sector.img;
       img.onload = () => handleImageLoad(sector.img);
@@ -71,11 +87,14 @@ const WhatWeDo = ({ onLoad }) => {
   }, []);
 
   // Memoize sectors data to prevent unnecessary re-renders
-  const sectors = useMemo(() => [
-    { title: 'Offices', img: '/image9.jpg' },
-    { title: 'Healthcare', img: '/pic5.jpg' },
-    { title: 'Industrial Spaces', img: '/shop.webp' }
-  ], []);
+  const sectors = useMemo(
+    () => [
+      { title: "Offices", img: "/image9.jpg" },
+      { title: "Healthcare", img: "/pic5.jpg" },
+      { title: "Industrial Spaces", img: "/shop.webp" },
+    ],
+    []
+  );
 
   // Handle touch events for mobile swipe
   const handleTouchStart = (e) => {
@@ -88,7 +107,7 @@ const WhatWeDo = ({ onLoad }) => {
 
   const handleTouchEnd = () => {
     if (!touchStart || !touchEnd) return;
-    
+
     const distance = touchStart - touchEnd;
     const isLeftSwipe = distance > 50;
     const isRightSwipe = distance < -50;
@@ -110,7 +129,9 @@ const WhatWeDo = ({ onLoad }) => {
   }, [sectors.length]);
 
   const prevSlide = useCallback(() => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + sectors.length) % sectors.length);
+    setCurrentIndex(
+      (prevIndex) => (prevIndex - 1 + sectors.length) % sectors.length
+    );
   }, [sectors.length]);
 
   // Auto-slide effect
@@ -122,49 +143,49 @@ const WhatWeDo = ({ onLoad }) => {
   // Animation variants with optimized timing and easing
   const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
       transition: {
         duration: 1.0,
-        ease: [0.6, -0.05, 0.01, 0.99]
-      }
-    }
+        ease: [0.6, -0.05, 0.01, 0.99],
+      },
+    },
   };
 
   const fadeIn = {
     hidden: { opacity: 0 },
-    visible: { 
+    visible: {
       opacity: 1,
       transition: {
         duration: 1.0,
-        ease: [0.6, -0.05, 0.01, 0.99]
-      }
-    }
+        ease: [0.6, -0.05, 0.01, 0.99],
+      },
+    },
   };
 
   const slideInLeft = {
     hidden: { opacity: 0, x: -30 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       x: 0,
       transition: {
         duration: 1.1,
-        ease: [0.6, -0.05, 0.01, 0.99]
-      }
-    }
+        ease: [0.6, -0.05, 0.01, 0.99],
+      },
+    },
   };
 
   const slideInRight = {
     hidden: { opacity: 0, x: 30 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       x: 0,
       transition: {
         duration: 1.0,
-        ease: [0.6, -0.05, 0.01, 0.99]
-      }
-    }
+        ease: [0.6, -0.05, 0.01, 0.99],
+      },
+    },
   };
 
   const staggerContainer = {
@@ -173,9 +194,9 @@ const WhatWeDo = ({ onLoad }) => {
       opacity: 1,
       transition: {
         staggerChildren: 0.15,
-        delayChildren: 0.1
-      }
-    }
+        delayChildren: 0.1,
+      },
+    },
   };
 
   const approachVariants = {
@@ -185,9 +206,9 @@ const WhatWeDo = ({ onLoad }) => {
       y: 0,
       transition: {
         duration: 1.0,
-        ease: [0.6, -0.05, 0.01, 0.99]
-      }
-    }
+        ease: [0.6, -0.05, 0.01, 0.99],
+      },
+    },
   };
 
   const approachContainer = {
@@ -196,9 +217,9 @@ const WhatWeDo = ({ onLoad }) => {
       opacity: 1,
       transition: {
         staggerChildren: 0.2,
-        delayChildren: 0.1
-      }
-    }
+        delayChildren: 0.1,
+      },
+    },
   };
 
   const iconVariants = {
@@ -208,185 +229,177 @@ const WhatWeDo = ({ onLoad }) => {
       rotate: 0,
       transition: {
         duration: 0.8,
-        ease: [0.6, -0.05, 0.01, 0.99]
-      }
-    }
+        ease: [0.6, -0.05, 0.01, 0.99],
+      },
+    },
   };
 
   return (
     <>
-    <WhatWeDoHero />
-   
+      <WhatWeDoHero />
 
       {/* DESIGN AND BUILD + OUR APPROACH */}
-      <motion.div
-        className='relative'
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={staggerContainer}
-      >
-        <motion.div
-          style={{
-            backgroundImage: "url('/image3.jpg')",
-            backgroundSize: "cover",
-            backgroundPosition: "center"
-          }}
-          className='relative'
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ 
-            duration: 1,
-            ease: [0.6, -0.05, 0.01, 0.99]
-          }}
-        >
-          <div className='absolute inset-0 bg-black/70' aria-hidden="true"></div>
-
-          <div className='relative z-10 py-20'>
-            <motion.h2
-              className='text-4xl md:text-5xl text-white font-bold text-center mb-10'
-              variants={slideInLeft}
-            >
-              DESIGN AND BUILD
-            </motion.h2>
-            <motion.p
-              className='max-w-4xl mx-auto text-lg md:text-xl text-white text-center px-6 mb-16 text-justify'
-              variants={slideInRight}
-            >
-              Our Design & Build approach offers a seamless solution for clients seeking an end-to-end construction experience. We integrate design, planning, and execution into a single streamlined process.
-            </motion.p>
-
-          
-       
-          </div>
-        </motion.div>
-      </motion.div>
+      <DesignandBuild />
 
       {/* SECTORS WE SERVE */}
       <motion.div
-        className='relative py-16 bg-gray-900'
+        className="relative min-h-screen bg-black/95 overflow-hidden py-20"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
         variants={staggerContainer}
       >
-        <motion.img
-          src='/pic3.jpg'
-          alt='Background'
-          className='absolute inset-0 w-full h-full object-cover object-center z-0 opacity-60'
-          loading="lazy"
-          decoding="async"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 0.3 }}
-          viewport={{ once: false, amount: 0.2 }}
-          transition={{ 
-            duration: 1,
-            ease: [0.6, -0.05, 0.01, 0.99]
+        {/* Background with parallax effect */}
+        <motion.div
+          className="absolute inset-0 z-0"
+          style={{
+            backgroundImage: "url('/pic3.jpg')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundAttachment: "fixed",
           }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 0.2 }}
+          transition={{ duration: 1.2 }}
         />
 
-        <div className='relative z-10'>
-          <motion.h2 
-            className='text-3xl md:text-4xl text-white font-bold text-center mb-8'
-            variants={slideInLeft}
-          >
-            SECTORS WE SERVE
-          </motion.h2>
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-black/50 to-black z-0" />
+        <GeneralContracting/>
+        <div className="relative z-10 container mx-auto px-4">
+          {/* Section Header */}
+          <motion.div className="text-center mb-16" variants={fadeIn}>
+            <motion.h2
+              className="text-4xl md:text-6xl font-light text-white mb-6 tracking-wider"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              SECTORS WE SERVE
+            </motion.h2>
+            <motion.div
+              className="h-1 w-24 bg-gradient-to-r from-[#2A72F8] to-[#8F44EC] mx-auto"
+              initial={{ width: 0 }}
+              whileInView={{ width: 96 }}
+              transition={{ duration: 1, delay: 0.2 }}
+            />
+          </motion.div>
 
-          {/* Mobile: Carousel */}
-          <div className='md:hidden w-full px-4'>
-            <motion.div 
-              className='relative overflow-hidden rounded-xl h-[300px]'
-              onTouchStart={handleTouchStart}
-              onTouchMove={handleTouchMove}
-              onTouchEnd={handleTouchEnd}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
+          {/* Mobile: Enhanced Carousel */}
+          <div className="md:hidden w-full px-4">
+            <motion.div
+              className="relative overflow-hidden rounded-2xl aspect-[3/4]"
               variants={fadeIn}
             >
-              <motion.div
-                className='w-full h-full'
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5 }}
-              >
-                <img
-                  src={sectors[currentIndex].img}
-                  alt={sectors[currentIndex].title}
-                  className='w-full h-full object-cover object-center'
-                  loading="lazy"
-                  decoding="async"
-                />
-                <div className='absolute inset-0 bg-black/20'></div>
-                <div className='absolute bottom-0 w-full py-4 text-white text-center'>
-                  <h3 className='text-xl font-semibold mb-2'>{sectors[currentIndex].title}</h3>
-                </div>
-              </motion.div>
-              
-              {/* Navigation Arrows */}
-              <button
-                className='absolute left-2 top-1/2 transform -translate-y-1/2 bg-black/20 text-white p-2 rounded-full'
-                onClick={prevSlide}
-                aria-label="Previous slide"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                </svg>
-              </button>
-              <button
-                className='absolute right-2 top-1/2 transform -translate-y-1/2 bg-black/20 text-white p-2 rounded-full'
-                onClick={nextSlide}
-                aria-label="Next slide"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </button>
-              
-              {/* Carousel Indicators */}
-              <div className='absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2'>
-                {sectors.map((_, index) => (
-                  <button
-                    key={index}
-                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                      currentIndex === index ? 'bg-white w-4' : 'bg-white/50'
-                    }`}
-                    onClick={() => setCurrentIndex(index)}
-                    aria-label={`Go to slide ${index + 1}`}
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentIndex}
+                  className="absolute inset-0"
+                  initial={{ opacity: 0, scale: 1.1 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <img
+                    src={sectors[currentIndex].img}
+                    alt={sectors[currentIndex].title}
+                    className="w-full h-full object-cover object-center"
                   />
-                ))}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
+                  <motion.div
+                    className="absolute bottom-0 w-full p-6 text-white"
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.2 }}
+                  >
+                    <h3 className="text-2xl font-light mb-2">
+                      {sectors[currentIndex].title}
+                    </h3>
+                    <p className="text-sm text-gray-300 opacity-90">
+                      Discover our expertise in creating innovative spaces
+                    </p>
+                  </motion.div>
+                </motion.div>
+              </AnimatePresence>
+
+              {/* Enhanced Navigation Controls */}
+              <div className="absolute top-1/2 left-0 right-0 flex justify-between px-4 -translate-y-1/2 pointer-events-none">
+                <motion.button
+                  className="w-10 h-10 rounded-full bg-black/30 backdrop-blur-sm text-white flex items-center justify-center pointer-events-auto"
+                  whileHover={{
+                    scale: 1.1,
+                    backgroundColor: "rgba(0,0,0,0.5)",
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={prevSlide}
+                >
+                  <ChevronDown className="w-6 h-6 rotate-90" />
+                </motion.button>
+                <motion.button
+                  className="w-10 h-10 rounded-full bg-black/30 backdrop-blur-sm text-white flex items-center justify-center pointer-events-auto"
+                  whileHover={{
+                    scale: 1.1,
+                    backgroundColor: "rgba(0,0,0,0.5)",
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={nextSlide}
+                >
+                  <ChevronDown className="w-6 h-6 -rotate-90" />
+                </motion.button>
               </div>
             </motion.div>
           </div>
 
-          {/* Desktop: Grid */}
-          <div className='hidden md:flex justify-evenly w-full px-6 gap-6'>
+          {/* Desktop: Enhanced Grid */}
+          <div className="hidden md:grid grid-cols-3 gap-8 max-w-7xl mx-auto">
             {sectors.map((sector, index) => (
               <motion.div
                 key={index}
-                className='relative w-[400px] h-[300px] rounded-xl overflow-hidden border border-gray-700 shadow-md hover:shadow-lg bg-gray-800'
-                whileHover={{ scale: 1.03 }}
+                className="group relative aspect-[4/5] rounded-2xl overflow-hidden bg-gray-900"
                 variants={fadeInUp}
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ 
-                  duration: 0.6,
-                  ease: [0.6, -0.05, 0.01, 0.99]
-                }}
+                custom={index}
+                whileHover={{ y: -10 }}
+                transition={{ duration: 0.4 }}
               >
-                <img
-                  src={sector.img}
-                  alt={sector.title}
-                  className='w-full h-full object-cover object-center transition-transform duration-300 hover:scale-110'
-                  loading="lazy"
-                  decoding="async"
-                />
-                <div className='absolute inset-0 bg-black/20'></div>
-                <div className='absolute bottom-0 w-full py-3 text-white text-center text-xl font-semibold'>
-                  {sector.title}
+                {/* Background Image */}
+                <motion.div
+                  className="absolute inset-0 w-full h-full"
+                  whileHover={{ scale: 1.1 }}
+                  transition={{ duration: 0.6 }}
+                >
+                  <img
+                    src={sector.img}
+                    alt={sector.title}
+                    className="w-full h-full object-cover object-center"
+                  />
+                </motion.div>
+
+                {/* Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
+
+                {/* Content */}
+                <div className="absolute inset-0 p-6 flex flex-col justify-end transform transition-transform duration-500">
+                  <motion.h3
+                    className="text-2xl font-light text-white mb-4 relative"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 }}
+                  >
+                    {sector.title}
+                    <div className="h-0.5 w-0 group-hover:w-full bg-gradient-to-r from-[#2A72F8] to-[#8F44EC] transition-all duration-500" />
+                  </motion.h3>
+
+                  <motion.p className="text-gray-300 text-sm opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                    Explore our innovative solutions and expertise in creating
+                    exceptional spaces that define the future.
+                  </motion.p>
                 </div>
+
+                {/* Hover Effect Border */}
+                <motion.div
+                  className="absolute -inset-0.5 rounded-2xl bg-gradient-to-r from-[#2A72F8] to-[#8F44EC] opacity-0 group-hover:opacity-20 transition-opacity duration-500 blur"
+                  style={{ zIndex: -1 }}
+                />
               </motion.div>
             ))}
           </div>
@@ -394,43 +407,9 @@ const WhatWeDo = ({ onLoad }) => {
       </motion.div>
 
       {/* WHY CHOOSE US */}
-      <motion.div
-        className='bg-gradient-to-r from-black via-gray-800 to-black py-16'
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={staggerContainer}
-      >
-        <div className='max-w-4xl mx-auto px-6 text-center'>
-          <motion.h2 
-            className='text-4xl md:text-5xl text-white font-bold mb-6'
-            variants={slideInLeft}
-          >
-            Why Choose Us
-          </motion.h2>
-          <motion.p 
-            className='text-lg md:text-xl text-white mb-8'
-            variants={slideInRight}
-          >
-            We are committed to delivering quality, innovative, and sustainable solutions that exceed client expectations. Our team of experts ensures that every project is executed with precision and care.
-          </motion.p>
-          <motion.button
-            className='bg-white text-black py-3 px-8 rounded-full text-lg font-semibold shadow-md hover:shadow-lg transition duration-300'
-            whileHover={{ scale: 1.05 }}
-            transition={{ 
-              type: 'spring',
-              stiffness: 300,
-              damping: 20
-            }}
-            variants={fadeInUp}
-          >
-            Learn More
-          </motion.button>
-        </div>
-      </motion.div>
-    
-    </> );
+      <WhyChooseUs />
+    </>
+  );
 };
 
 export default React.memo(WhatWeDo);
-

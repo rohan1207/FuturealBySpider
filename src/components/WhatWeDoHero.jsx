@@ -177,7 +177,7 @@ const WhatWeDoHero = ({ onLoad }) => {
             className="text-4xl md:text-6xl font-bold leading-tight mb-6"
           >
             <motion.span variants={itemVariants}>
-            Design & Build,<br />
+            What We Do<br />
               <span className="bg-gradient-to-r from-sky-400 to-purple-500 bg-clip-text text-transparent">Defining Experiences</span>
             </motion.span>
           </motion.h1>
@@ -186,7 +186,7 @@ const WhatWeDoHero = ({ onLoad }) => {
             variants={itemVariants}
             className="text-lg md:text-xl text-white/90 max-w-3xl mb-8"
           >
-          Whether it's a high-tech office, healthcare facility, or an industrial space our team collaborates closely with clients to understand their vision, then brings it to life with precision and creativity. With a strong focus on innovation, compliance, and functionality, we deliver spaces that are both aesthetically striking and purpose-built for performance.
+         We deliver designs that inspire, connect and perform.
           </motion.p>
 
           <motion.div 
