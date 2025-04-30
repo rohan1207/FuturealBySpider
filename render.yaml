@@ -3,15 +3,20 @@ services:
     name: futureal
     env: node
     buildCommand: |
+      export ROLLUP_NATIVE_BUILD=false
       rm -rf package-lock.json node_modules
-      npm install
+      npm install --platform=linux --arch=x64
       npm rebuild
       npm run build
     startCommand: npm run preview
-    nodeVersion: 18.x.x
+    nodeVersion: 16.x
     envVars:
       - key: NODE_ENV
         value: production
+      - key: NPM_CONFIG_PLATFORM
+        value: linux
+      - key: ROLLUP_NATIVE_BUILD
+        value: false
 routes:
   - type: rewrite
     source: /*
