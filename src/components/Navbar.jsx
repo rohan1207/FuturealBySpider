@@ -6,7 +6,7 @@ import { MenuIcon, XIcon } from "@heroicons/react/outline";
 const menuItems = [
   { name: "Who We Are", path: "/whoweare" },
   { name: "What We Do", path: "/design-build" },
-  { name: "About US", path: "/about" },
+  { name: "Meet Our Team", path: "/about" },
 ];
 
 const rightLinks = [

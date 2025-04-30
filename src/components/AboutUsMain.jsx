@@ -100,10 +100,10 @@ const AboutUsMain = () => {
             animate={isInView ? "show" : "hidden"}
           >
             {[
-              { number: "60+", label: "Years of Experience" },
-              { number: "100+", label: "Projects Completed" },
-              { number: "50+", label: "Expert Team Members" },
-              { number: "95%", label: "Client Satisfaction" },
+              { number: "50+", label: "Years of Collective Experience" },
+              { number: "15+", label: "Clients" },
+              { number: "10,00,000+", label: "Sq.ft.delivered" },
+              { number: "50+", label: "Project Completed" },
             ].map((stat, index) => (
               <motion.div
                 key={index}

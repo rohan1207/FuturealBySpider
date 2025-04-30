@@ -25,11 +25,6 @@ export default function WhyChooseUs({ onLoad }) {
       description: "We are committed to stringent quality control and safety standards, ensuring safe, durable, and sustainable project outcomes"
     },
     {
-      icon: <Search size={24} />,
-      title: "Simplified Project Oversight",
-      description: "We handle all the project phases, allowing clients to focus on their core business without the hassle of daily project management"
-    },
-    {
       icon: <DollarSign size={24} />,
       title: "Maximized ROI",
       description: "Through strategic planning, cost optimization, and value engineering, we ensure clients get the most from their investment"

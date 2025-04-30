@@ -7,19 +7,23 @@ import {
 import { Link } from "react-router-dom";
 
 const images = [
-  { src: "./image1.jpg", title: "Civil & Interior Works", category: "construction" },
-  { src: "./image7.jpg", title: "Turnkey D&B", category: "development" },
-  { src: "./image3.jpg", title: "General Contracting", category: "construction" },
-  { src: "./image8.jpg", title: "Civil & Interior Works", category: "interior" },
-  { src: "./image9.jpg", title: "Turnkey D&B", category: "development" },
-  { src: "./image10.jpg", title: "General Contracting", category: "construction" },
-  { src: "./img6.webp", title: "General Contracting", category: "construction" },
-  { src: "./pic1.jpg", title: "Turnkey D&B", category: "commercial" },
-  { src: "./pic2.jpg", title: "Civil & Interior Works", category: "residential" },
-  { src: "./pic3.jpg", title: "Turnkey D&B", category: "commercial" },
-  { src: "./pic4.jpg", title: "Civil & Interior Works", category: "residential" },
-  { src: "./pic5.jpg", title: "Turnkey D&B", category: "commercial" },
-  { src: "./realestate.jpg", title: "Civil & Interior Works", category: "residential" }
+  { src: "./office1.jpg", title: "Civil & Interior Works", category: "construction" },
+  { src: "./office2.jpg", title: "Turnkey D&B", category: "development" },
+  { src: "./office3.jpg", title: "General Contracting", category: "construction" },
+  { src: "./office4.jpg", title: "Civil & Interior Works", category: "interior" },
+  { src: "./office5.jpg", title: "Turnkey D&B", category: "development" },
+  { src: "./office6.jpg", title: "General Contracting", category: "construction" },
+  { src: "./office7.jpg", title: "General Contracting", category: "construction" },
+  { src: "./office8.jpg", title: "Turnkey D&B", category: "commercial" },
+  { src: "./office9.jpg", title: "Civil & Interior Works", category: "residential" },
+  { src: "./hospital1.jpg", title: "Turnkey D&B", category: "commercial" },
+  { src: "./hospital2.jpg", title: "Civil & Interior Works", category: "residential" },
+  { src: "./hospital3.jpg", title: "Turnkey D&B", category: "commercial" },
+  { src: "./hospital4.jpg", title: "Civil & Interior Works", category: "residential" },
+  { src: "./school3.jpg", title: "Civil & Interior Works", category: "residential" },
+  { src: "./school4.jpeg", title: "Turnkey D&B", category: "commercial" },
+  { src: "./school5.jpg", title: "General Contracting", category: "construction" },
+
 ];
 
 const WhatWeDoHero = ({ onLoad }) => {

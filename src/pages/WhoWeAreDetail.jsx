@@ -4,6 +4,8 @@ import WWRHeroSection from '../components/WWRHeroSection'
 import IPDModal from '../components/IPDModal'
 import IDPValueCreationSection from '../components/IDPValueCreationSection'
 import WhyChooseUs from '../components/WhyChooseUs'
+import VisonandMission from '../components/VisionandMission'
+import OurValues from '../components/OurValues'
 
 export default function WhoWeAreDetail() {
     const [isLoading, setIsLoading] = useState(true);
@@ -70,6 +72,8 @@ export default function WhoWeAreDetail() {
                 <WWRHeroSection onLoad={() => handleComponentLoad('hero')} />
                 <IPDModal onLoad={() => handleComponentLoad('modal')} />
                 <IDPValueCreationSection onLoad={() => handleComponentLoad('valueCreation')} />
+                <OurValues onLoad={() => handleComponentLoad("ourValues")} />
+                    <VisonandMission></VisonandMission>
                 <WhyChooseUs onLoad={() => handleComponentLoad('whyChooseUs')} />
             </motion.div>
         </>

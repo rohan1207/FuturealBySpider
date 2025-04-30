@@ -89,9 +89,9 @@ const WhatWeDo = ({ onLoad }) => {
   // Memoize sectors data to prevent unnecessary re-renders
   const sectors = useMemo(
     () => [
-      { title: "Offices", img: "/image9.jpg" },
-      { title: "Healthcare", img: "/pic5.jpg" },
-      { title: "Industrial Spaces", img: "/shop.webp" },
+      { title: "Education Spaces", img: "/school3.jpg" },
+      { title: "Healthcare Spaces", img: "/hospital3.jpg" },
+      { title: "Industrial Spaces", img: "/pic1.jpg" },
     ],
     []
   );

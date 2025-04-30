@@ -7,6 +7,8 @@ import OurValues from "../components/OurValues";
 import OurProcess from "../components/OurProcess";
 import Footer from "../components/Footer";
 import DesignExcellence from "../components/DesignExcellence";
+import AboutUs from "./AboutUs";
+import AboutUsMain from "../components/AboutUsMain";
 
 export default function HomePage() {
   const [isLoading, setIsLoading] = useState(true);
@@ -67,12 +69,14 @@ export default function HomePage() {
       </AnimatePresence>
 
       <Hero onLoad={() => handleComponentLoad("hero")} />
-      <OurValues onLoad={() => handleComponentLoad("ourValues")} />
       <DesignExcellence
         onLoad={() => handleComponentLoad("designExcellence")}
       />
+     
+    
       <WhoAreWe onLoad={() => handleComponentLoad("whoAreWe")} />
       <OurProcess onLoad={() => handleComponentLoad("ourProcess")} />
+        <AboutUsMain></AboutUsMain>
     </>
   );
 }

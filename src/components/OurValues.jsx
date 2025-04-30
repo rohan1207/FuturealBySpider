@@ -14,32 +14,39 @@ import { useInView } from "react-intersection-observer";
 
 const values = [
   {
-    id: "efficiency",
+    id: "excellence",
     icon: <RiSpeedLine className="text-4xl" />,
-    title: "Efficiency",
+    title: "Excellence",
     description:
-      "Our solutions are designed to maximize productivity, minimizing waste and delivering results quickly and effectively.",
+      "Ensuring everything we do is the best possible, always",
   },
   {
-    id: "transparency",
+    id: "leadership",
     icon: <RiShieldLine className="text-4xl" />,
-    title: "Transparency",
+    title: "Leadership",
     description:
-      "We believe in open communication and clear processes, ensuring trust and accountability in everything we do.",
+      "Enabling people to contribute to making something extraordinary",
   },
   {
-    id: "respect",
+    id: "integrity",
     icon: <RiUserSmileLine className="text-4xl" />,
-    title: "Respect",
+    title: "Integrity",
     description:
-      "We value our clients and partners, fostering relationships built on mutual respect and appreciation.",
+      "Act with honesty, fairness and consistency in all relationships",
   },
   {
-    id: "passion",
+    id: "empathy",
     icon: <RiHeartLine className="text-4xl" />,
-    title: "Passion",
+    title: "Empathy",
     description:
-      "Driven by a deep commitment to excellence, we put our heart into every project to ensure success.",
+      "Understanding client needs deeply to create solutions that truly resonate",
+  },
+  {
+    id: "commitment",
+    icon: <RiHeartLine className="text-4xl" />,
+    title: "Commitment",
+    description:
+      "Work with dedication and go the extra mile",
   },
 ];
 
@@ -103,7 +110,7 @@ const OurValues = ({ onLoad }) => {
               slidesPerView: 2,
             },
             1024: {
-              slidesPerView: 4,
+              slidesPerView: 5,
             },
           }}
         >

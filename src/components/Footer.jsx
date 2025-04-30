@@ -61,7 +61,7 @@ const Footer = () => {
                   <span className="mr-2 opacity-0 group-hover:opacity-100 transition-opacity">
                     →
                   </span>
-                  About Us
+                  Meet Our Team
                 </Link>
               </li>
               <li>
@@ -72,29 +72,29 @@ const Footer = () => {
                   <span className="mr-2 opacity-0 group-hover:opacity-100 transition-opacity">
                     →
                   </span>
-                  Contact Us
+                  Connect With Us
                 </Link>
               </li>
               <li>
                 <Link
-                  to="/services"
+                  to="/design-build"
                   className="text-gray-300 hover:text-transparent bg-clip-text bg-gradient-to-r from-[#2A72F8] to-[#8F44EC] transition-all duration-300 text-sm flex items-center group"
                 >
                   <span className="mr-2 opacity-0 group-hover:opacity-100 transition-opacity">
                     →
                   </span>
-                  Services
+                  what We Do
                 </Link>
               </li>
               <li>
                 <Link
-                  to="/projects"
+                  to="/whoweare"
                   className="text-gray-300 hover:text-transparent bg-clip-text bg-gradient-to-r from-[#2A72F8] to-[#8F44EC] transition-all duration-300 text-sm flex items-center group"
                 >
                   <span className="mr-2 opacity-0 group-hover:opacity-100 transition-opacity">
                     →
                   </span>
-                  Projects
+                  who We Are
                 </Link>
               </li>
             </ul>

@@ -7,15 +7,20 @@ export default function WhoAreWe({ onLoad }) {
   const [imagesLoaded, setImagesLoaded] = useState(0);
   const [activeIndex, setActiveIndex] = useState(0);
   const images = [
-    "/image1.jpg",
-    "/image7.jpg",
-    "/image3.jpg",
-    "/image8.jpg",
-    "/image9.jpg",
-    "/image10.jpg",
-    "/realestate.jpg",
-    "/shop.webp",
-    "/img6.webp",
+    
+    "/school3.jpg",
+    "/school4.jpeg",
+    "/school5.jpg",
+    "/office1.jpg",
+    "/office2.jpg",
+    "/office5.jpg",
+    "/office6.jpg",
+    "/office7.jpg",
+    "/hospital1.jpg",
+    "/hospital2.jpg",
+    "/hospital3.jpg",
+    "/hospital4.jpg",
+   
   ];
 
   const cards = [
