@@ -1,3 +1,17 @@
+services:
+  - type: web
+    name: futureal
+    env: node
+    buildCommand: |
+      rm -rf package-lock.json node_modules
+      npm install
+      npm rebuild
+      npm run build
+    startCommand: npm run preview
+    nodeVersion: 18.x.x
+    envVars:
+      - key: NODE_ENV
+        value: production
 routes:
   - type: rewrite
     source: /*
